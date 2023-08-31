@@ -25,10 +25,9 @@ router.get('/new', function(req, res, next) {
 });
 
 router.get('/', (req, res) => {
-  
   const newMessage = {
-      text: req.body.message,
-      user: req.body.author,
+      message: req.body.message,
+      user: req.body.user,
       added: new Date()
   };
 
@@ -36,5 +35,14 @@ router.get('/', (req, res) => {
 
   res.redirect('/');
 });
+
+router.post('/new', function(req, res, next) {
+  
+  const messageUser = req.body.user;
+  const messageText = req.body.message;
+  messages.push({text: messageText, user: messageUser, added: new Date()});
+
+  res.redirect('/')
+})
 
 module.exports = router;
